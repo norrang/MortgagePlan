@@ -58,7 +58,8 @@ public class MortgageCalculator implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println("Printing mortgage estimates loaded from the CSV to terminal\n");
+        System.out.println("\n\n**********************************************" +
+                "Printing mortgage estimates loaded from the CSV to terminal\n");
 
         var counter = 1;
         for (Estimate estimate :
@@ -69,6 +70,8 @@ public class MortgageCalculator implements CommandLineRunner {
             );
             counter++;
         }
+
+        System.out.println("**********************************************\n\n");
 
     }
 

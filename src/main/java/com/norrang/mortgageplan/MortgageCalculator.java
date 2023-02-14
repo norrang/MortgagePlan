@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class MortgageCalculator implements CommandLineRunner {
 
-    private List<Estimate> estimates = new ArrayList<>();
+    final private List<Estimate> estimates = new ArrayList<>();
 
     public MortgageCalculator() {
         try {
@@ -27,7 +27,7 @@ public class MortgageCalculator implements CommandLineRunner {
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
             var prospects = csvReader.readAll().stream().filter(c -> c.length == 4).toList();
 
-            prospects.stream().forEach(prospect -> {
+            prospects.forEach(prospect -> {
                 try {
                     // If comma separated name, replaces comma with space to make it look better
                     var name = prospect[0];
@@ -41,7 +41,7 @@ public class MortgageCalculator implements CommandLineRunner {
                             Double.parseDouble(prospect[2]) / 100,
                             Integer.parseInt(prospect[3])
                     ));
-                } catch (NumberFormatException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println("Error processing prospect " + prospect[0] + ": " + e.getMessage());
                 }
             });
@@ -58,7 +58,7 @@ public class MortgageCalculator implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println("\n\n**********************************************" +
+        System.out.println("\n\n**********************************************\n" +
                 "Printing mortgage estimates loaded from the CSV to terminal\n");
 
         var counter = 1;
@@ -71,7 +71,7 @@ public class MortgageCalculator implements CommandLineRunner {
             counter++;
         }
 
-        System.out.println("**********************************************\n\n");
+        System.out.println("\n**********************************************\n\n");
 
     }
 

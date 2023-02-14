@@ -10,7 +10,7 @@ public class Estimate {
 
     public Estimate() {}
 
-    public Estimate(String prospectName, double loanSize, double yearlyInterest, int duration) {
+    public Estimate(String prospectName, double loanSize, double yearlyInterest, int duration) throws IllegalArgumentException {
         this.prospectName = prospectName;
         this.loanSize = loanSize;
         this.yearlyInterest = yearlyInterest;

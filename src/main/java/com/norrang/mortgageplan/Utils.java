@@ -29,7 +29,7 @@ public class Utils {
     /**
      * As java.Math is disallowed, a function to round a double
      * @param number The number to round
-     * @return
+     * @return The rounded number
      */
     public static double round(double number) {
         if ((number + .5) >= ((int) number + 1)) {
@@ -48,8 +48,19 @@ public class Utils {
      * @param years          Loan lengths in years
      * @return Fixed monthly payment
      */
-    public static double calculateMortgage(double loan, double yearlyInterest, int years) {
-        // Todo: add potential exceptions, the loan and duration can of course not be negative
+    public static double calculateMortgage(double loan, double yearlyInterest, int years) throws IllegalArgumentException {
+        if (loan <= 0) {
+            throw new IllegalArgumentException("Loan must be more than 0");
+        }
+
+        if (yearlyInterest < 0) {
+            throw new IllegalArgumentException("Yearly interest must be positive");
+        }
+
+        if (years <= 0) {
+            throw new IllegalArgumentException("Duration must be more than 0");
+        }
+
         var months = years * 12;
         var monthlyInterest = yearlyInterest / 12;
         var a = powerOf((1 + monthlyInterest), months); // Save the result to save

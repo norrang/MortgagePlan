@@ -1,0 +1,47 @@
+ <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mortgage estimator - Money Bin Inc.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Using TailwindCSS for styling, the CDN is enough for this small project -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8 flex flex-col gap-5">
+    <h1 class="text-3xl mb-5">Mortgage estimator</h1>
+
+    <a class="underline" th:text="'Add estimate'" href="/add" />
+
+    <p th:text="'Current number of estimates: ' + ${estimates.size()}" />
+
+    <div>
+        <div>
+            <table class="table-auto border-collapse border border-slate-500">
+                <thead class="text-lg">
+                    <tr>
+                        <th class="px-4 border border-slate-600">Customer name</th>
+                        <th class="px-4 border border-slate-600">Loan size</th>
+                        <th class="px-4 border border-slate-600">Yearly interest (%)</th>
+                        <th class="px-4 border border-slate-600">Loan duration (years)</th>
+                        <th class="px-4 border border-slate-600">Calculated monthly mortgage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${estimates.empty}">
+                        <td> No estimates available </td>
+                    </tr>
+                    <tr class="border border-slate-700 p-2" th:each="estimate : ${estimates}">
+                        <td class="border border-slate-700 p-2" th:text="${estimate.prospectName}"></td>
+                        <td class="border border-slate-700 p-2" th:text="${estimate.loanSize}"></td>
+                        <td class="border border-slate-700 p-2" th:text="${estimate.yearlyInterest * 100}"></td>
+                        <td class="border border-slate-700 p-2" th:text="${estimate.duration}"></td>
+                        <td class="border border-slate-700 p-2" th:text="${estimate.monthlyMortgage + '€'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
